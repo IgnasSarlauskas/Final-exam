@@ -29,13 +29,6 @@ class ApiForm extends \Core\Views\Form {
                         ]
                     ]
                 ],
-                'date' => [
-                    'extra' => [
-                        'validators' => [
-//                            'validate_not_empty'
-                        ]
-                    ]
-                ],
             ],
             'callbacks' => [
                 'success' => 'form_success',

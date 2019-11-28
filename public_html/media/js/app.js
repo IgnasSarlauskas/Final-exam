@@ -215,7 +215,7 @@ const table = {
                 container.innerHTML = `
                     <p>Vartotojas: ${data.name}</p>
                     <p><i>"${data.comment}"</i></p>
-                   
+                   <p>"${data.date}"</p>
                     `;
                 row.appendChild(container);
             });

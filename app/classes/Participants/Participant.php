@@ -17,6 +17,7 @@ class Participant {
                 'id' => null,
                 'name' => null,
                 'comment' => null,
+                'date' => date('Y.m.d'),
             ];
         }
     }
@@ -36,6 +37,8 @@ class Participant {
         
         if (isset($array['date'])) {
             $this->setDate($array['date']);
+        } else {
+            $this->setDate(date('Y.m.d'));
         }
     }
 
@@ -48,6 +51,7 @@ class Participant {
             'id' => $this->getId(),
             'name' => $this->getName(),
             'comment' => $this->getComment(),
+            'date' => $this->getDate(),
         ];
     }
 

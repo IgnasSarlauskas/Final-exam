@@ -26,7 +26,6 @@ validate_form($filtered_input, $form);
  */
 function form_success($filtered_input, $form) {
     $response = new \Core\Api\Response();
-
     $participant = new \App\Participants\Participant($filtered_input);
     $model = new \App\Participants\Model();
     $id = $model->insert($participant);
