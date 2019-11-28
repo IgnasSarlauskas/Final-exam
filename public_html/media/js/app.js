@@ -14,6 +14,13 @@ const endpoints = {
  * @param {type} success Success callback
  * @param {type} fail Fail callback
  * @returns {undefined}
+ *  * Executes API request.
+ *  fetch() - url adresu kreipiasi į nurodyta endpoint. formData kintamasis savyje saugo POST
+ * metodo masyvą (šiuo atveju pasiselektinto lauko (row) id), ir tą POST masyvą nusiunčią į endpointo adresą. endpointe
+ *  (pvz. delete.php), jau egzistuoja atsiųstas POST metodas, ir pagal jį vykdome jame aprašytą php kodą. Kai jis įsivykdo,
+ *  jame suformuojamas duomenų masyvas, su success arba fail, pagal tai ar pavyko, ar ne. Baigus šitą, fetch() suformuoja
+ *  response objektą json formatu, ir TIK TADA vykdo then(). jeigu pavyksta response decodinti iš jasono, vėl vykdo then().
+ *  pagal tai, ar objekte buvo succes arba fail, kviečia atitinkamą f-ją, paduodama to objekto data.
  */
 function api(url, formData, success, fail) {
     fetch(url, {
@@ -70,54 +77,7 @@ const forms = {
             forms.ui.errors.show(forms.create.getElement(), errors);
         }
     },
-    /**
-     * Update Form
-     */
-    update: {
-        init: function () {
-            console.log('Initializing update form...');
-            this.elements.form().addEventListener('submit', this.onSubmitListener);
-
-            const closeBtn = forms.update.elements.modal().querySelector('.close');
-            closeBtn.addEventListener('click', forms.update.onCloseListener);
-
-        },
-        elements: {
-            form: function () {
-                return document.getElementById("update-form");
-            },
-            modal: function () {
-                return document.getElementById("update-modal");
-            }
-        },
-        onSubmitListener: function (e) {
-            e.preventDefault();
-            let formData = new FormData(e.target);
-            let id = forms.update.elements.form().getAttribute('data-id');
-            formData.append('id', id);
-
-            api(endpoints.update, formData, forms.update.success, forms.update.fail);
-        },
-        success: function (data) {
-            table.row.update(data);
-            forms.update.hide();
-        },
-        fail: function (errors) {
-            forms.ui.errors.show(this.elements.form(), errors);
-        },
-        fill: function (data) {
-            forms.ui.fill(forms.update.elements.form(), data);
-        },
-        onCloseListener: function (e) {
-            forms.update.hide();
-        },
-        show: function () {
-            this.elements.modal().style.display = 'block';
-        },
-        hide: function () {
-            this.elements.modal().style.display = 'none';
-        }
-    },
+    
     /**
      * Common/Universal Form UI Functions
      */
@@ -211,9 +171,6 @@ const table = {
     init: function () {
         this.data.load();
 
-        Object.keys(this.buttons).forEach(buttonId => {
-            table.buttons[buttonId].init();
-        });
     },
     /**
      * Data-Related functionality
@@ -256,23 +213,11 @@ const table = {
             Object.keys(data).forEach(data_id => {
 
                 container.innerHTML = `
-                    <p>id: ${data.id}</p>
                     <p>Vartotojas: ${data.name}</p>
                     <p><i>"${data.comment}"</i></p>
+                   
                     `;
                 row.appendChild(container);
-            });
-
-            let buttons = {
-                delete: 'Ištrinti',
-//                edit: 'Redaguoti'
-            };
-
-            Object.keys(buttons).forEach(button_id => {
-                let btn = document.createElement('button');
-                btn.innerHTML = buttons[button_id];
-                btn.className = button_id;
-                row.append(btn);
             });
 
             return row;
@@ -284,80 +229,10 @@ const table = {
          */
         append: function (data) {
             table.getElement().append(this.build(data));
-        },
-        /**
-         * Updates existing row in table from data
-         * Row is selected via "id" index in data
-         * 
-         * @param {Object} data
-         */
-        update: function (data) {
-            let row = table.getElement().querySelector('div[data-id="' + data.id + '"]');
-            row.replaceWith(this.build(data));
-            //row = this.build(data);
-        },
-        /**
-         * Deletes existing row
-         * @param {Integer} id
-         */
-        delete: function (id) {
-            const row = table.getElement().querySelector('div[data-id="' + id + '"]');
-            row.remove();
         }
-    },
-    buttons: {
-        delete: {
-            init: function () {
-                table.getElement().addEventListener('click', this.onClickListener);
-            },
-            getElements: function () {
-                return document.querySelectorAll('.delete-btn');
-            },
-            onClickListener: function (e) {
-                if (e.target.className === 'delete') {
-                    let formData = new FormData();
 
-                    let tr = e.target.closest('div');
-
-                    formData.append('id', tr.getAttribute('data-id'));
-                    api(endpoints.delete, formData, table.buttons.delete.success, table.buttons.delete.fail);
-                }
-            },
-            success: function (data) {
-                console.log(data);
-                table.row.delete(data.id);
-            },
-            fail: function (errors) {
-                alert(errors[0]);
-            }
-        },
-        edit: {
-            init: function () {
-                table.getElement().addEventListener('click', this.onClickListener);
-            },
-            getElements: function () {
-                return document.querySelectorAll('.edit-btn');
-            },
-            onClickListener: function (e) {
-                if (e.target.className === 'edit') {
-                    let formData = new FormData();
-
-                    let tr = e.target.closest('div');
-
-                    formData.append('row_id', tr.getAttribute('data-id'));
-                    api(endpoints.get, formData, table.buttons.edit.success, table.buttons.edit.fail);
-                }
-            },
-            success: function (data) {
-                let person_data = data[0];
-                forms.update.show();
-                forms.update.fill(person_data);
-            },
-            fail: function (errors) {
-                alert(errors[0]);
-            }
-        }
     }
+
 };
 
 /**

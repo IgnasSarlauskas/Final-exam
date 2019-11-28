@@ -3,14 +3,9 @@ require '../bootloader.php';
 
 use App\App;
 
-$createForm = new \App\Participants\Views\CreateForm();
-$updateForm = new \App\Participants\Views\UpdateForm();
 $navigation = new \App\Views\Navigation();
 $footer = new \App\Views\Footer();
 
-//if (!App::$session->userLoggedIn()) {
-//    header('Location: /login.php');
-//}
 ?>
 <html>
     <head>

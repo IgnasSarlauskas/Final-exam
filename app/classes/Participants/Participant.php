@@ -7,7 +7,7 @@ class Participant {
     private $data = [];
 
 //    This array is for select input 
-
+    
 
     public function __construct($data = null) {
         if ($data) {
@@ -17,7 +17,6 @@ class Participant {
                 'id' => null,
                 'name' => null,
                 'comment' => null,
-                
             ];
         }
     }
@@ -34,6 +33,10 @@ class Participant {
         }
         $this->setName($array['name'] ?? null);
         $this->setComment($array['comment'] ?? null);
+        
+        if (isset($array['date'])) {
+            $this->setDate($array['date']);
+        }
     }
 
     /**
@@ -91,6 +94,14 @@ class Participant {
      */
     public function getComment() {
         return $this->data['comment'];
+    }
+    
+     public function setDate(string $date) {
+        $this->data['date'] = $date;
+    }
+    
+     public function getDate() {
+        return $this->data['date'];
     }
 
 }

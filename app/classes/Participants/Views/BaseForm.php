@@ -14,7 +14,7 @@ class BaseForm extends \Core\Views\Form {
                 'comment' => [
                     'label' => 'Jusu Atsiliepimas',
                     'type' => 'text',
-                ],                
+                ], 
             ],
             'buttons' => [
                 'submit' => [
