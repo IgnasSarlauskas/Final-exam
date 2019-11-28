@@ -50,7 +50,6 @@ $footer = new \App\Views\Footer();
                     </div>
                 </div>
 
-
                 <div class="service-card">
                     <div class="image">
                         <img src="/../media/img/fast-car.jpg" alt="Avatar" style="">
@@ -73,7 +72,6 @@ $footer = new \App\Views\Footer();
 
             </iframe>
         </section>
-
 
         <!-- Footer -->        
         <footer>

@@ -18,6 +18,7 @@ class RegisterForm extends \Core\Views\Form {
                         'validators' => [
                             'validate_not_empty',
                             'validate_input_length',
+                            'validate_registration_name'
                         ]
                     ],
                 ],
@@ -27,7 +28,8 @@ class RegisterForm extends \Core\Views\Form {
                     'extra' => [
                         'validators' => [
                             'validate_not_empty',
-                            'validate_input_length'
+                            'validate_input_length',
+                            'validate_registration_name',
                         ]
                     ],
                 ],

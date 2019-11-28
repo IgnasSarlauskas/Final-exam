@@ -29,7 +29,6 @@ $footer = new \App\Views\Footer();
 
         <main>
             <section class="wrapper">
-
                 <div class="block">
                     <h2>Atsiliepimai:</h2> 
                     <div class="comment-container"></div> 
@@ -42,9 +41,7 @@ $footer = new \App\Views\Footer();
                     <div> Norėdami parašyti komentarą privalote <a href="register.php">užsiregistruoti</a></div>
                     <?php endif; ?>                 
                 </div>
-
-            </section>
-                        
+            </section>               
         </main>
 
         <!-- Footer -->        
@@ -52,6 +49,5 @@ $footer = new \App\Views\Footer();
             <?php print $footer->render(); ?>
         </footer>
         <script defer src="media/js/app.js"></script>
-
     </body>
 </html>

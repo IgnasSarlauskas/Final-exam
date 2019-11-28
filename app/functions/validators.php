@@ -50,3 +50,11 @@ function validate_comment_length($field_value, &$field) {
     }
 }
 
+function validate_registration_name($field_value, &$field) {
+ if (preg_match("/[0-9]+$/", $field_value)) {
+        $field['error'] = 'Varde negali buti skaiciu!';
+    } else {
+        return true;
+    }   
+}
+

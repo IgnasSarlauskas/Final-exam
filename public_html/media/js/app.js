@@ -3,8 +3,6 @@
 const endpoints = {
     get: 'api/participants/get.php',
     create: 'api/participants/create.php',
-    update: 'api/participants/update.php',
-    delete: 'api/participants/delete.php'
 };
 
 /**

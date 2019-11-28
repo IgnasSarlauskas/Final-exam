@@ -1,1 +1,1 @@
-{"users":[{"id":null,"name":"test","surname":"test","email":"test@test.com","password":"123456789","phone_number":""}],"Comments":[{"id":null,"name":"test","comment":"test","date":"2019.11.28"},{"id":null,"name":"petras","comment":"viskas gerai","date":"2019.11.28"}]}
+{"users":[{"id":null,"name":"test","surname":"test","email":"test@test.com","password":"123456789","phone_number":""}],"Comments":[{"id":null,"name":"Petras","comment":"labai kokybiskos paslaugos","date":"2019.11.28"},{"id":null,"name":"jonas","comment":"viskas gerai","date":"2019.11.28"}]}
